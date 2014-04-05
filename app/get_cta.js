@@ -12,22 +12,23 @@ module.exports = function () {
   var cta = {
 
     // resources of interest;
-    resources: { systemTime: 'gettime',
+    resources: {
+                 systemTime: 'gettime',
                  routes: 'getroutes'
                },
 
     // fns; return promises
     fns: {
-      // main entry point
-      getResource: function (resource) {
-        return qhttp.read(baseUrl + resource + '?' + 'key=' + key)
-          .then(_.compose(cta.fns.qParseXml, String))
-      },
+          // main entry point
+          getResource: function (resource) {
+            return qhttp.read(baseUrl + resource + '?' + 'key=' + key)
+              .then(_.compose(cta.fns.qParseXml, String))
+          },
 
-      qParseXml: function (xml) {
-        var parseXml = xml2js.parseString;
-        return Q.nfcall(parseXml, xml)
-      },
+          qParseXml: function (xml) {
+            var parseXml = xml2js.parseString;
+            return Q.nfcall(parseXml, xml)
+          },
     },
   }
 
